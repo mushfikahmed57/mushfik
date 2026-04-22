@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainstem Health Hub</title>
+
+    <style>
+        /* ===================== */
+        /* GLOBAL */
+        /* ===================== */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            background: url("bg.jpg.png") center/cover no-repeat fixed;
+        }
+
+        /* LIGHTER OVERLAY (FIXED) */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            /* FIXED */
+            z-index: -1;
+        }
+
+        /* ===================== */
+        /* NAVBAR */
+        /* ===================== */
+        .hub-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .brand-logo {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .brand-logo span {
+            color: #0ea5e9;
+        }
+
+        .hub-nav-links a {
+            color: #94a3b8;
+            margin: 0 12px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .hub-nav-links a:hover {
+            color: #0ea5e9;
+        }
+
+        /* ===================== */
+        /* HEADER */
+        /* ===================== */
+        .hub-header {
+            text-align: center;
+            padding: 60px 20px 20px;
+        }
+
+        .hub-header h1 {
+            font-size: 32px;
+        }
+
+        .hub-header p {
+            color: #cbd5f5;
+        }
+
+        /* ===================== */
+        /* FOOTER */
+        /* ===================== */
+        .hub-footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            margin-top: 40px;
+        }
+
+        /* ===================== */
+        /* BUTTON */
+        /* ===================== */
+        .action-btn {
+            background: #0ea5e9;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #0ea5e9;
+        }
+
+        /* ===================== */
+        /* INPUT */
+        /* ===================== */
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        /* ===================== */
+        /* HERO (FIXED - NO BLACK BOX) */
+        /* ===================== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 80px 40px;
+            gap: 40px;
+
+            /* CLEAN GRID EFFECT (NO BLACK BLOCK) */
+            background-image:
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 24px,
+                    rgba(255, 255, 255, 0.05) 25px),
+                repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 24px,
+                    rgba(255, 255, 255, 0.05) 25px);
+        }
+
+        .hero-left h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero-left p {
+            color: #cbd5f5;
+            margin-bottom: 25px;
+            max-width: 500px;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 400px;
+            opacity: 0.9;
+        }
+
+        /* ===================== */
+        /* FEATURES */
+        /* ===================== */
+        .home-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+        }
+
+        /* ===================== */
+        /* ABOUT */
+        /* ===================== */
+        .about-modern {
+            padding: 60px 20px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .about-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: transform 0.5s ease;
+        }
+
+        .about-card:hover .about-img {
+            transform: scale(1.08);
+        }
+
+        .about-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            border-radius: 12px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+            pointer-events: none;
+        }
+
+        .about-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.3);
+        }
+
+        .about-card.highlight {
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+
+        /* ===================== */
+        /* STATISTICS */
+        /* ===================== */
+        .stats-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .nhs-card {
+            background: white;
+            color: black;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        #analysisOutput {
+            font-size: 22px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        /* ===================== */
+        /* CONTACT */
+        /* ===================== */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 30px;
+        }
+
+        /* ===================== */
+        /* ANIMATION */
+        /* ===================== */
+        .fade {
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===================== */
+        /* RESPONSIVE */
+        /* ===================== */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-img {
+                margin: auto;
+            }
+
+            .hub-header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="hub-navbar">
+        <div class="brand-logo">BRAINSTEM<span>HUB</span></div>
+
+        <div class="hub-nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <div class="hero-left">
+            <h1>Engineering the future of preventive healthcare</h1>
+
+            <p>
+                Brainstem Health Hub helps people understand stroke risks,
+                detect symptoms early, and take action with confidence.
+            </p>
+
+            <a href="statistics.html" class="action-btn hero-btn">
+                Check Your Risk
+            </a>
+        </div>
+
+        <div class="hero-right">
+            <img src="brain.png" class="hero-img">
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+    <section class="home-features">
+
+        <div class="feature-card">
+            <h3>Early Detection</h3>
+            <p>Identify stroke symptoms quickly and act fast.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Risk Analysis</h3>
+            <p>Use our smart tool to evaluate your stroke risk.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Health Awareness</h3>
+            <p>Learn prevention methods and stay safe.</p>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="hub-footer">
+        <p>© 2026 Brainstem Health Hub</p>
+    </footer>
+
+</body>
+
+</html>
